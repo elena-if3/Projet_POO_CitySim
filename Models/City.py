@@ -1,7 +1,7 @@
 import random
 
 class City:
-    def __init__(self, name="Springfield", facilities={Housing:[], Leisure:[], FoodFactory:[], WaterFacility:[], PowerPlant:[]}, resources={Food:0, Electricity:0, Water:0}):
+    def __init__(self, name="Springfield", facilities={}, resources={}):
         self.day = 0
         self.daily_log = []
         self.name = name
@@ -44,10 +44,10 @@ class City:
     def add_resource(self, resource):
         if not issubclass(type(resource), Resource):
             raise TypeError("Not a subclass of Resource")
-        self.resources[type(resource)].append(resource)
+        self.resources[type(resource)] += self.resources.get(type(resource), 0) + resource.amount
 
     def live_day(self):
-        production_facility = [facility for facility in self.facilities if issubclass(type(facility), Production)]
-        for pf in production_facility:
-            resource = pf.produce()
-            self.resources[type(resource)] += resource.amount
+        production_facilities = [facility for facility in self.facilities if issubclass(type(facility), Production)]
+        for production_facility in production_facilities:
+            resource = production_facility.produce()
+            self.add_resource(resource)

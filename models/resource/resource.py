@@ -1,8 +1,8 @@
 from abc import ABC
 
 class Resource(ABC):
-    def __init__(self, value : int = 0):
-        self.__amount = value
+    def __init__(self, amount : int = 0):
+        self.__amount = amount
     
     @property
     def amount(self):

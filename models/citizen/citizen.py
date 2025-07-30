@@ -26,7 +26,7 @@ class Citizen:
         return self.__profession
     
     @profession.setter
-    def profession(self, value : Profession):
+    def profession(self, value: Profession):
         self.__profession = value
     
     @property
@@ -40,3 +40,11 @@ class Citizen:
     @property
     def day_activity(self):
         return self.__day_activity
+
+
+    def sleep() -> None:
+        pass
+
+    def work() -> None:
+        pass
+    

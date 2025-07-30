@@ -2,7 +2,7 @@ from models.citizen.profession import Profession
 
 
 class Citizen:
-    def __init__(self, name: str, age: int, profession: Profession, satisfaction: int, day_activity: bool = True):
+    def __init__(self, name: str, age: int, profession: Profession, satisfaction: int, day_activity: bool = True) -> None:
         self.__name = name
         self.__age = age
         self.__profession = profession
@@ -10,33 +10,39 @@ class Citizen:
         self.__day_activity = day_activity
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
     
     @property
-    def age(self):
+    def age(self) -> int:
         return self.__age
     
     @age.setter
-    def age(self, value: int):
+    def age(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise TypeError("Not an integer")
         self.__age = value
     
     @property
-    def profession(self):
+    def profession(self) -> Profession:
         return self.__profession
     
     @profession.setter
-    def profession(self, value : Profession):
+    def profession(self, value : Profession) -> None:
+        if not isinstance(value, Profession):
+            raise TypeError("Not an instance of Profession")
         self.__profession = value
     
     @property
-    def satisfaction(self):
+    def satisfaction(self) -> int:
         return self.__satisfaction
     
     @satisfaction.setter
-    def satisfaction(self, value: int):
+    def satisfaction(self, value: int) -> None:
+        if not isinstance(value, int):
+            raise TypeError("Not an integer")
         self.__satisfaction = value
 
     @property
-    def day_activity(self):
+    def day_activity(self) -> bool:
         return self.__day_activity

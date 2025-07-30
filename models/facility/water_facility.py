@@ -1,4 +1,5 @@
-from produtcion import Production
+from production import Production
 
 class WaterFacility(Production):
-    pass
+    def __init__(self, name, capacity):
+        super().__init__(name, capacity)

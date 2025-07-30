@@ -1,4 +1,4 @@
-from produtcion import Production
+from production import Production
 
 class PowerPlant(Production):
     pass

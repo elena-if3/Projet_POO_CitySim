@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Facility:
+class Facility(ABC):
     """
     This abstract class serves as base class for all facilities (production, housing and leisure)
     """

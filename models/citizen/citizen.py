@@ -1,3 +1,6 @@
+from models.citizen.profession import Profession
+
+
 class Citizen:
     def __init__(self, name: str, age: int, profession: Profession, satisfaction: int, day_activity: bool = True):
         self.__name = name

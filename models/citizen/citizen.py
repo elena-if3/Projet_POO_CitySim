@@ -25,7 +25,7 @@ class Citizen:
     @age.setter
     def age(self, value: int) -> None:
         if not isinstance(value, int):
-            raise TypeError("age must be an integer")
+            raise TypeError("Value 'age' must be an integer")
         self.__age = value
     
     @property
@@ -35,7 +35,7 @@ class Citizen:
     @satisfaction.setter
     def satisfaction(self, value: int) -> None:
         if not isinstance(value, int):
-            raise TypeError("satisfaction must be an integer")
+            raise TypeError("Value 'satisfaction' must be an integer")
         self.__satisfaction = value
 
     @property
@@ -45,19 +45,19 @@ class Citizen:
     @is_alive.setter
     def is_alive(self, value: bool) -> None:
         if not isinstance(value, bool):
-            raise TypeError("is_alive must be a boolean")
+            raise TypeError("Value 'is_alive' must be a boolean")
         self.__is_alive = value
 
 
     def grow(self, is_night: bool, electricity: Electricity, food: Food, water: Water) -> None:
         if not isinstance(is_night, bool):
-            raise TypeError("parameter 'is_night' must be a boolean")
+            raise TypeError("Parameter 'is_night' must be a boolean")
         if not isinstance(electricity, Electricity):
-            raise TypeError("parameter 'electricity' must be a list")
+            raise TypeError("Parameter 'electricity' must be a list")
         if not isinstance(food, Food):
-            raise TypeError("parameter 'food' must be a list")
+            raise TypeError("Parameter 'food' must be a list")
         if not isinstance(water, Water):
-            raise TypeError("parameter 'water' must be a list")
+            raise TypeError("Parameter 'water' must be a list")
         if not is_night:
             if self.work_info.day_worker:
                 self.__use_resources(electricity, food, water)
@@ -87,7 +87,7 @@ class Citizen:
 
     def leisure_time(self, parks: list[Leisure]) -> None:
         if not isinstance(parks, list):
-            raise TypeError("parameter 'parks' must be a list")
+            raise TypeError("Parameter 'parks' must be a list")
         if len(parks) > 1:
             park = choice(parks)
         elif len(parks) == 1:

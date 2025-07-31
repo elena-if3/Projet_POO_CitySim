@@ -46,3 +46,22 @@ class Citizen:
             raise TypeError("is_alive must be a boolean")
         self.__is_alive = value
 
+
+    def grow() -> None:
+        pass
+
+    def __get_older() -> None:
+        pass
+
+    def __use_resources(electricity: Electricity, food: Food, water: Water) -> None:
+        pass
+
+    def __update_status() -> None:
+        pass
+
+    def __sleep() -> None:
+        pass
+
+    def leisure_time() -> None:
+        pass
+    

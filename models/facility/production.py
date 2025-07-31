@@ -1,9 +1,9 @@
-from facility import Facility
+from .facility import Facility
 from abc import abstractmethod
 
 class Production(Facility):
-    def __init__(self, name, capacity):
-        super().__init__(name, capacity)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.__workers = []
 
     @property

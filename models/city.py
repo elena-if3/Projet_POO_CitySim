@@ -83,11 +83,11 @@ class City:
             raise TypeError("Not a Resource instance")
         self.__resources[type(resource)] = self.__resources.get(type(resource), 0) + resource.amount
 
-    def factory_produce(self, is_night):
+    def factory_produce(self):
         for facility_type, facilities in self.__facilities.items():
             if issubclass(facility_type, Factory):
                 for facility in facilities:
-                    self.add_resource(facility.produce(weekday=self.weekday, is_night=is_night))
+                    self.add_resource(facility.produce(self.weekday))
 
     def event_happen(self):
         pass
@@ -106,8 +106,7 @@ class City:
     def attribute_factory(self, citizen):
         for factories in self.__facilities[citizen.profession].values():
             for factory in factories:
-                if not factory.is_full:
-                    factory.add_worker(citizen)
+                if factory.add_worker(citizen): # True if there is place in factory
                     return True
         return False
 
@@ -131,32 +130,19 @@ class City:
             if self.weekday in citizen.work.off_days:
                 citizen.leisure(self.__facilities[Leisure])
 
-    def grow_citizen(self, is_night):
-        for citizen in self.citizens:
-            citizen.grow(food=self.__resources[Food], water=self.__resources[Water], is_night=is_night)
-
-    def grow_city(self, is_night):
+    def grow_city(self):
         for facilities in self.__facilities.values():
             for facility in facilities:
-                facility.grow(electricity=self.__resources[Electricity], water=self.__resources[Water], is_night=is_night)
-        self.grow_citizen(is_night=is_night)
+                facility.degrade()
+        for citizen in self.citizens:
+            citizen.grow(food=self.__resources[Food], water=self.__resources[Water])
 
     def live_day(self):
         self.event_happen()
         self.update_citizens_facilities()
         self.municipality()
-        self.factory_produce(is_night=False)
+        self.factory_produce()
         self.citizens_leisure()
-        self.grow_city(is_night=False)
+        self.grow_city()
         self.update_citizens_facilities()
-
-    def live_night(self):
-        self.event_happen()
-        self.update_citizens_facilities()
-        self.factory_produce(is_night=True)
-        self.grow_city(is_night=True)
-
-    def live_complete_day(self):
-        self.live_day()
-        self.live_night()
         self.__day += 1

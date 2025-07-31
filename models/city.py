@@ -147,10 +147,14 @@ class City:
         self.citizens_leisure()
         self.grow_city(is_night=False)
         self.update_citizens_facilities()
-        self.__day += 1
 
     def live_night(self):
         self.event_happen()
         self.update_citizens_facilities()
         self.factory_produce(is_night=True)
         self.grow_citizen(is_night=True)
+
+    def live_complete_day(self):
+        self.live_day()
+        self.live_night()
+        self.__day += 1

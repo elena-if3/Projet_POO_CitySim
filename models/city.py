@@ -83,11 +83,11 @@ class City:
             raise TypeError("Not a Resource instance")
         self.__resources[type(resource)] = self.__resources.get(type(resource), 0) + resource.amount
 
-    def factory_produce(self, is_day):
+    def factory_produce(self, is_night):
         for facility_type, facilities in self.__facilities.items():
             if issubclass(facility_type, Production):
                 for facility in facilities:
-                    self.add_resource(facility.produce(weekday=self.weekday, is_day=is_day))
+                    self.add_resource(facility.produce(weekday=self.weekday, is_night=is_night))
 
     def event_happen(self):
         pass
@@ -130,28 +130,28 @@ class City:
             if self.weekday in citizen.work.off_days:
                 citizen.leisure(self.__facilities[Leisure])
 
-    def grow_citizen(self, is_day):
+    def grow_citizen(self, is_night):
         for citizen in self.citizens:
-            citizen.grow(food=self.__resources[Food], water=self.__resources[Water], is_day=is_day)
+            citizen.grow(food=self.__resources[Food], water=self.__resources[Water], is_night=is_night)
 
-    def grow_city(self, is_day):
+    def grow_city(self, is_night):
         for facilities in self.__facilities.values():
             for facility in facilities:
                 facility.grow(electricity=self.__resources[Electricity])
-        self.grow_citizen(is_day=is_day)
+        self.grow_citizen(is_night=is_night)
 
     def live_day(self):
         self.event_happen()
         self.update_citizens_facilities()
         self.municipality()
-        self.factory_produce(is_day=True)
+        self.factory_produce(is_night=False)
         self.citizens_leisure()
-        self.grow_city(is_day=True)
+        self.grow_city(is_night=False)
         self.update_citizens_facilities()
         self.__day += 1
 
     def live_night(self):
         self.event_happen()
         self.update_citizens_facilities()
-        self.factory_produce(is_day=False)
-        self.grow_citizen(is_day=False)
+        self.factory_produce(is_night=True)
+        self.grow_citizen(is_night=True)

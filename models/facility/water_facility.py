@@ -10,5 +10,5 @@ class WaterFacility(Production):
         # Get factoy workers working on that shift
         working_workers = super().get_working_workers(day, is_night)
         # Get total quantity produced during that shift
-        produced_qty = super().dayly_production(DAILY_WATER_PRODUCTION_PER_WORKER, working_workers)
+        produced_qty = super().daily_production(DAILY_WATER_PRODUCTION_PER_WORKER, working_workers)
         return Water(produced_qty)

@@ -29,7 +29,7 @@ class Production(Facility):
             worker.work()
         return working_workers
 
-    def dayly_production(self, daily_production_per_worker: int, working_workers_count: int) -> int:
+    def daily_production(self, daily_production_per_worker: int, working_workers_count: int) -> int:
         if self.integrity < PRODUCTION_SHUTDOWN_THRESHOLD:
             # no production possible
             return 0

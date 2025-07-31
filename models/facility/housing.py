@@ -6,8 +6,12 @@ class Housing(Facility):
         self.__inhabitants = []
 
     @property
-    def inhabitants(self):
-        return self.__workers
+    def inhabitants(self) -> list("Citizen"):
+        return self.__inhabitants
+    
+    @property
+    def is_full(self) -> bool:
+        return len(self.inhabitants) >= self.capacity
 
     def add_inhabitant(citizen):
         if not isinstance(citizen, Citizen):

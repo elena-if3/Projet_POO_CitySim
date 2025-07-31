@@ -1,4 +1,13 @@
 import random
+from .facility.facility import Facility
+from .facility.housing import Housing
+from .facility.leisure import Leisure
+from .facility.production import Production
+from .resource.resource import Resource
+from .resource.food import Food
+from .resource.water import Water
+from .resource.electricity import Electricity
+from .citizen.citizen import Citizen
 
 class City:
     def __init__(self, name="Springfield", facilities=None, resources=None):

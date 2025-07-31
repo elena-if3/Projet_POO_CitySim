@@ -15,18 +15,23 @@ class Production(Facility):
     def is_full(self) -> bool:
         return len(self.workers) >= self.capacity
 
+    @property
+    
+
     @abstractmethod
     def produce():
         pass
 
+    def workers_work(self, working_workers: list("Citizen")) -> None:
+        for worker in working_workers:
+            worker.work()
+    
     def get_working_workers(self, day: int, is_day_shift: bool) -> list("Citizen"):
         working_workers = [
             worker for worker in self.workers if (
                 worker.work_info.is_day_worker == is_day_shift and
                 day not in worker.work_info.off_days)
         ]
-        for worker in working_workers:
-            worker.work()
         return working_workers
 
     def daily_production(self, daily_production_per_worker: int, working_workers_count: int) -> int:

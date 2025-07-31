@@ -1,11 +1,8 @@
-from models.citizen.profession import Profession
-
 
 class Citizen:
-    def __init__(self, name: str, age: int, profession: Profession, satisfaction: int, day_activity: bool = True) -> None:
+    def __init__(self, name: str, age: int, satisfaction: int, day_activity: bool = True) -> None:
         self.__name = name
         self.__age = age
-        self.__profession = profession
         self.__satisfaction = satisfaction
         self.__day_activity = day_activity
 
@@ -22,16 +19,6 @@ class Citizen:
         if not isinstance(value, int):
             raise TypeError("Not an integer")
         self.__age = value
-    
-    @property
-    def profession(self) -> Profession:
-        return self.__profession
-    
-    @profession.setter
-    def profession(self, value : Profession) -> None:
-        if not isinstance(value, Profession):
-            raise TypeError("Not an instance of Profession")
-        self.__profession = value
     
     @property
     def satisfaction(self) -> int:

@@ -1,4 +1,6 @@
+from random import choice
 from models.citizen.work_info import WorkInfo
+from models.facility.leisure import Leisure
 from models.resource.electricity import Electricity
 from models.resource.food import Food
 from models.resource.water import Water
@@ -47,21 +49,32 @@ class Citizen:
         self.__is_alive = value
 
 
-    def grow() -> None:
+    def grow(self) -> None:
         pass
 
-    def __get_older() -> None:
+    def __get_older(self) -> None:
         pass
 
-    def __use_resources(electricity: Electricity, food: Food, water: Water) -> None:
+    def __use_resources(self, electricity: Electricity, food: Food, water: Water) -> None:
         pass
 
-    def __update_status() -> None:
+    def __update_status(self) -> None:
         pass
 
-    def __sleep() -> None:
+    def __sleep(self) -> None:
         pass
 
-    def leisure_time() -> None:
+    def leisure_time(self, parks: list[Leisure]) -> None:
+        if not isinstance(parks, list):
+            raise TypeError("parameter 'parks' must be a list")
+        if len(parks) > 1:
+            park = choice(parks)
+        elif len(parks) == 1:
+            park = parks[0]
+        else:
+            # What if list if empty?
+            pass
+        # How do we check if max capacity reached???
+        
         pass
     

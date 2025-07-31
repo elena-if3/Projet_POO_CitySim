@@ -1,5 +1,5 @@
-from facility import Facility
+from .facility import Facility
 
 class Leisure(Facility):
-    def __init__(self, name, capacity):
-        super().__init__(name, capacity)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)

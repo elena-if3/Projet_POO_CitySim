@@ -8,7 +8,6 @@ from .resource.food import Food
 from .resource.water import Water
 from .resource.electricity import Electricity
 from .citizen.citizen import Citizen
-from models.resource import electricity
 
 class City:
     def __init__(self, name="Springfield", facilities=None, resources=None):

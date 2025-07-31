@@ -2,7 +2,7 @@ import random
 from .facility.facility import Facility
 from .facility.housing import Housing
 from .facility.leisure import Leisure
-from .facility.production import Production
+from .facility.factory import Factory
 from .resource.resource import Resource
 from .resource.food import Food
 from .resource.water import Water
@@ -84,7 +84,7 @@ class City:
 
     def factory_produce(self, is_night):
         for facility_type, facilities in self.__facilities.items():
-            if issubclass(facility_type, Production):
+            if issubclass(facility_type, Factory):
                 for facility in facilities:
                     self.add_resource(facility.produce(weekday=self.weekday, is_night=is_night))
 

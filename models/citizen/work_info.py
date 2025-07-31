@@ -17,7 +17,7 @@ class WorkInfo:
     @profession.setter
     def profession(self, value: Profession) -> None:
         if not isinstance(value, Profession):
-            raise TypeError("Not an instance of Profession")
+            raise TypeError("Value 'profession' must be an instance of Profession")
         self.__profession = value
 
     @property
@@ -27,7 +27,7 @@ class WorkInfo:
     @day_worker.setter
     def day_worker(self, value: bool) -> None:
         if not isinstance(value, bool):
-            raise TypeError("Not a boolean")
+            raise TypeError("Value 'day_worker' must be a boolean")
         self.__day_worker = value
 
     @property
@@ -37,5 +37,5 @@ class WorkInfo:
     @off_days.setter
     def off_days(self, value: list) -> None:
         if not isinstance(value, list):
-            raise TypeError("Not a list")
+            raise TypeError("Value 'off_days' must be a list")
         self.__off_days = value

@@ -11,6 +11,8 @@ class FoodFactory(Factory):
         working_workers = super().get_working_workers(day, is_night)
         # Make them work
         super.workers_work(working_workers)
+        # Degrade factory
+        super().damage(FOOD_PRODUCTION_DAMAGE)
         # Get total quantity produced during that shift
-        produced_qty = super().daily_production(DAILY_FOOD_PRODUCTION_PER_WORKER, len(working_workers))
+        produced_qty = super().daily_production(FOOD_DAILY_PRODUCTION_PER_WORKER, len(working_workers))
         return Food(produced_qty)

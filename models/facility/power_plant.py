@@ -11,6 +11,8 @@ class PowerPlant(Factory):
         working_workers = super().get_working_workers(day, is_night)
         # Make them work
         super.workers_work(working_workers)
+        # Degrade factory
+        super().damage(ELECTRICITY_PRODUCTION_DAMAGE)
         # Get total quantity produced during that shift
-        produced_qty = super().daily_production(DAILY_ELECTRICITY_PRODUCTION_PER_WORKER, len(working_workers))
+        produced_qty = super().daily_production(ELECTRICITY_DAILY_PRODUCTION_PER_WORKER, len(working_workers))
         return Electricity(produced_qty)

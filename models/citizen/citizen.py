@@ -49,8 +49,29 @@ class Citizen:
         self.__is_alive = value
 
 
-    def grow(self) -> None:
-        pass
+    def grow(self, is_night: bool, electricity: Electricity, food: Food, water: Water) -> None:
+        if not isinstance(is_night, bool):
+            raise TypeError("parameter 'is_night' must be a boolean")
+        if not isinstance(electricity, Electricity):
+            raise TypeError("parameter 'electricity' must be a list")
+        if not isinstance(food, Food):
+            raise TypeError("parameter 'food' must be a list")
+        if not isinstance(water, Water):
+            raise TypeError("parameter 'water' must be a list")
+        if not is_night:
+            if self.work_info.day_worker:
+                self.__use_resources(electricity, food, water)
+            else:
+                self.__sleep()
+                self.__get_older()
+                self.__update_status()
+        else:
+            if not self.work_info.day_worker:
+                self.__use_resources(electricity, food, water)
+            else:
+                self.__sleep()
+                self.__get_older()
+                self.__update_status()
 
     def __get_older(self) -> None:
         pass

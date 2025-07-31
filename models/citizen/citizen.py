@@ -1,12 +1,6 @@
-from random import choice, randint
-from models.citizen.work_info import WorkInfo
-from models.facility.leisure import Leisure
-from models.resource.food import Food
-from models.resource.water import Water
-
 
 class Citizen:
-    def __init__(self, name: str, age: int, satisfaction: int, work_info: WorkInfo, is_alive: bool = True) -> None:
+    def __init__(self, name: str, age: int, satisfaction: int, day_activity: bool = True) -> None:
         self.__name = name
         self.__age = age
         self.__satisfaction = satisfaction

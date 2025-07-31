@@ -2,7 +2,7 @@ import random
 from .facility.facility import Facility
 from .facility.housing import Housing
 from .facility.leisure import Leisure
-from .facility.production import Production
+from .facility.factory import Factory
 from .resource.resource import Resource
 from .resource.food import Food
 from .resource.water import Water

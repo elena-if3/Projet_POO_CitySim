@@ -88,14 +88,16 @@ class Citizen:
     def leisure_time(self, parks: list[Leisure]) -> None:
         if not isinstance(parks, list):
             raise TypeError("Parameter 'parks' must be a list")
+        if len(parks) == 0:
+            # What if list empty? Decrease satisfaction?
+            self.__satisfaction -= 1
         if len(parks) > 1:
             park = choice(parks)
-        elif len(parks) == 1:
-            park = parks[0]
         else:
-            # What if list if empty?
-            pass
-        # How do we check if max capacity reached???
-        
-        pass
-    
+            park = parks[0]
+
+        if park.is_full:
+            self.__satisfaction -= 1
+        else:
+            self.__satisfaction += 2
+            park.integrity -= 1    # Need integrity setter if I want to be able to do this

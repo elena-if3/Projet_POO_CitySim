@@ -2,7 +2,7 @@ from .facility import Facility
 from abc import abstractmethod
 from ...tools.constants import *
 
-class Production(Facility):
+class Factory(Facility):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.__workers = []

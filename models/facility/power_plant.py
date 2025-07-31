@@ -1,8 +1,8 @@
-from .production import Production
+from .factory import Factory
 from ..resource.electricity import Electricity
 from ...tools.constants import *
 
-class PowerPlant(Production):
+class PowerPlant(Factory):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
     

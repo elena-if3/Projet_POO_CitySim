@@ -1,8 +1,8 @@
-from .production import Production
+from .factory import Factory
 from ..resource.food import Food
 from ...tools.constants import *
 
-class FoodFactory(Production):
+class FoodFactory(Factory):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
     

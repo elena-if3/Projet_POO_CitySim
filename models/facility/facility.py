@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class Facility(ABC):
     """
-    This abstract class serves as base class for all facilities (production, housing and leisure)
+    This abstract class serves as base class for all facilities (factory, housing and leisure)
     """
     def __init__(self, name: str, capacity: int) -> None:
         self.__name = name
@@ -42,3 +42,6 @@ class Facility(ABC):
             self.__integrity = 0
         else:
             self.__integrity -= damage
+    
+    def grow():
+        pass

@@ -74,7 +74,7 @@ class Citizen:
                 self.__update_status()
 
     def __get_older(self) -> None:
-        pass
+        self.__age += 1
 
     def __use_resources(self, electricity: Electricity, food: Food, water: Water) -> None:
         pass
@@ -83,7 +83,7 @@ class Citizen:
         pass
 
     def __sleep(self) -> None:
-        pass
+        self.__satisfaction += 2    # increase by how many points???
 
     def leisure_time(self, parks: list[Leisure]) -> None:
         if not isinstance(parks, list):

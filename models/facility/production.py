@@ -8,7 +8,7 @@ class Production(Facility):
         self.__workers = []
 
     @property
-    def workers(self):
+    def workers(self) -> list("Citizen"):
         return self.__workers
     
     @property
@@ -37,5 +37,8 @@ class Production(Facility):
             # total production based on workers count and facility's integrity 
             return round(working_workers_count * daily_production_per_worker * (self.integrity / 100))
 
-    def add_worker(self, citizen) -> bool:
-        pass
+    def add_worker(self, citizen: "Citizen") -> bool:
+        if self.is_full:
+            return False
+        self.workers.append(citizen)
+        return True

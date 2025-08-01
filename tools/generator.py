@@ -93,4 +93,7 @@ class Generator:
         for _ in range(30):
             facilities.setdefault(Housing, []).append(Housing())
         resources = {Water:Water(100), Food:Food(100), Electricity:Electricity(100)}
-        return City(name=city_name, facilities=facilities, resources=resources)
+        city = City(name=city_name, facilities=facilities, resources=resources)
+        for _ in range(100):
+            city.add_citizen(Generator.citizen_generator())
+        return city

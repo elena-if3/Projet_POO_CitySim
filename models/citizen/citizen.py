@@ -1,4 +1,5 @@
 from random import choice, randint
+from models.citizen.profession import Profession
 from models.citizen.work_info import WorkInfo
 from models.facility.leisure import Leisure
 from models.resource.food import Food
@@ -77,8 +78,20 @@ class Citizen:
         water.amount -= 1
 
     def __update_status(self) -> None:
-        r = randint(1, 100)
         age = self.__age // 365
+        # If adult -> activate profession
+        if age >= 18:
+            r = randint(1, 10)
+            if r == 1:
+                self.work_info.profession = Profession.JOBLESS
+            elif r <= 4:
+                self.work_info.profession = Profession.FOOD_FACTORY
+            elif r <= 7:
+                self.work_info.profession = Profession.POWER_PLANT
+            else:
+                self.work_info.profession = Profession.WATER_SUPPLY_PLANT
+        # Check probability to be dead:
+        r = randint(1, 100)
         # If aged between 20 and 40 -> 1% probability to die
         if 20 < age <= 40:
             if r == 100:

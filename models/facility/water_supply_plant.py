@@ -4,7 +4,7 @@ from tools.constants import *
 
 class WaterSupplyPlant(Factory):
     def __init__(self, name = "Water Supply Plant", **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(name = name, **kwargs)
     
     def produce(self, day: int, is_day_shift: bool) -> "Water":
         # Get factory workers working on that shift

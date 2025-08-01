@@ -15,7 +15,7 @@ class Leisure(Facility):
     def is_full(self) -> bool:
         return len(self.users) >= self.capacity
     
-    def grow(self, electricity: Electricity, water: Water, is_night: bool) -> None:
+    def grow(self, electricity: "Electricity", water: "Water", is_night: bool) -> None:
         # damage caused by users
         damage = round(self.users * DAMAGE_DAILY_PER_LEISURE_USER)
         # all users leave the leisure facility at end of day or night
@@ -28,8 +28,6 @@ class Leisure(Facility):
         super().grow(damage)
     
     def add_user(citizen):
-        if not isinstance(citizen, Citizen):
-            raise TypeError("Only citizens can be added as leisure users")
         if len(self.__users) == self.capacity:
             raise Exception("This leisure facility is full already")
         

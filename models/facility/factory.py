@@ -6,7 +6,7 @@ import random
 
 class Factory(Facility):
     def __init__(self, capacity: int = FACTORY_DEFAULT_CAPACITY, **kwargs):
-        super().__init__(capacity, **kwargs)
+        super().__init__(capacity = capacity, **kwargs)
         self.__workers = []
 
     @property
@@ -16,9 +16,6 @@ class Factory(Facility):
     @property
     def is_full(self) -> bool:
         return len(self.workers) >= self.capacity
-
-    @property
-    
 
     @abstractmethod
     def produce():
@@ -45,6 +42,8 @@ class Factory(Facility):
             return round(working_workers_count * daily_production_per_worker * (self.integrity / 100))
 
     def add_worker(self, citizen: "Citizen") -> bool:
+        if citizen.work_info.profession.value != type(self):
+            raise TypeError(f"A {citizen.work_info.profession.value.__name__} worker cannot work in a {type(self).__name__}")
         if self.is_full:
             return False
         self.workers.append(citizen)

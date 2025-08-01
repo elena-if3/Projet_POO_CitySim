@@ -6,7 +6,7 @@ from tools.constants import *
 
 class FoodFactory(Factory):
     def __init__(self, name = "Food Factory", **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(name = name, **kwargs)
     
     def produce(self, day: int, is_day_shift: bool) -> Food:
         # Get factory workers working on that shift

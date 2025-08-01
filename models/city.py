@@ -69,7 +69,7 @@ class City:
     def add_citizen_housing(self, citizen):
         if not isinstance(citizen, Citizen):
             raise TypeError("Not a Citizen instance")
-        housing_available = [housing for housing in self.__facilities.get(Housing, []) if housing.capacity > len(housing.inhabitants)]
+        housing_available = [housing for housing in self.__facilities.get(Housing, []) if not housing.is_full]
         if housing_available:
             random.choice(housing_available).add_inhabitant(citizen)
             return True

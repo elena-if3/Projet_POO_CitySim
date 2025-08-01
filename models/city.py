@@ -137,7 +137,7 @@ class City:
     def grow_city(self, is_night):
         for facilities in self.__facilities.values():
             for facility in facilities:
-                facility.grow(electricity=self.__resources[Electricity], water=self.__resources[Water])
+                facility.grow(electricity=self.__resources[Electricity], water=self.__resources[Water], is_night=is_night)
         self.grow_citizen(is_night=is_night)
 
     def live_day(self):
@@ -153,7 +153,7 @@ class City:
         self.event_happen()
         self.update_citizens_facilities()
         self.factory_produce(is_night=True)
-        self.grow_citizen(is_night=True)
+        self.grow_city(is_night=True)
 
     def live_complete_day(self):
         self.live_day()

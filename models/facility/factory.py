@@ -1,12 +1,12 @@
-from .facility import Facility
+from models.facility.facility import Facility
 from abc import abstractmethod
-from ...tools.constants import *
-from ..resource.electricity import Electricity
+from tools.constants import *
+from models.resource.electricity import Electricity
 import random
 
 class Factory(Facility):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, capacity: int = FACTORY_DEFAULT_CAPACITY, **kwargs):
+        super().__init__(capacity, **kwargs)
         self.__workers = []
 
     @property

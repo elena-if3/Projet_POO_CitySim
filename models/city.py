@@ -12,7 +12,6 @@ from .citizen.citizen import Citizen
 class City:
     def __init__(self, name="Springfield", facilities=None, resources=None):
         self.__day = 0
-        self.__daily_log = []
         self.__name = name
         self.__facilities = facilities or {}
         self.__resources = resources or {}
@@ -25,10 +24,6 @@ class City:
     @property
     def name(self):
         return self.__name
-
-    @property
-    def daily_log(self):
-        return self.__daily_log
 
     @property
     def facilities(self):
@@ -105,7 +100,8 @@ class City:
     def attribute_factory(self, citizen):
         for factories in self.__facilities[citizen.profession].values():
             for factory in factories:
-                if factory.add_worker(citizen): # True if there is place in factory
+                if not factory.is_full:
+                    factory.add_worker(citizen)
                     return True
         return False
 

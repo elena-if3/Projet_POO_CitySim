@@ -90,7 +90,7 @@ class Generator:
         for factory_type in factory_types:
             for _ in range(2):
                 facilities.setdefault(factory_type, []).append(factory_type())
-        facilities[Leisure] = Leisure()
+        facilities[Leisure] = [Leisure()]
         for _ in range(30):
             facilities.setdefault(Housing, []).append(Housing())
         resources = {Water:Water(100), Food:Food(100), Electricity:Electricity(100)}

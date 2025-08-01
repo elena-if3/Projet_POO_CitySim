@@ -1,4 +1,4 @@
-from menu import Menu
+from .menu import Menu
 
 class MenuBuilder:
     """
@@ -22,6 +22,19 @@ class MenuBuilder:
         cls.__options[index] = { "description" : description, "function" : function }
         return cls
 
+    @classmethod
+    def add_return(cls, top_level : bool = True, function = lambda : quit()):
+        """
+
+        :param description:
+        :type description:
+        :param function:
+        :type function:
+        :return:
+        :rtype:
+        """
+        cls.__options[0] = {"description" : "Quit" if top_level else "Back", "function" : function}
+        return cls
 
     @classmethod
     def build(cls):

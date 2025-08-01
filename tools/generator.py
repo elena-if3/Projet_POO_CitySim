@@ -1,6 +1,15 @@
 import random
+from ..models.city import City
 from ..models.citizen.citizen import Citizen
 from ..models.citizen.profession import Profession
+from ..models.facility.food_factory import FoodFactory
+from ..models.facility.power_plant import PowerPlant
+from ..models.facility.water_facility import WaterFacility
+from ..models.facility.leisure import Leisure
+from ..models.facility.housing import Housing
+from ..models.resource.electricity import Electricity
+from ..models.resource.food import Food
+from ..models.resource.water import Water
 
 class Generator:
     @staticmethod
@@ -45,3 +54,55 @@ class Generator:
         satisfaction = 100
         day_worker = True
         return Citizen(name, age, profession, satisfaction, day_worker)
+
+    @staticmethod
+    def generate_city():
+
+        prefixes = [
+                "Aero", "Aqua", "Aven", "Breeze", "Bright", "Cloud", "Coral", "Crimson", "Crystal",
+                "Dawn", "Deep", "Emerald", "Ever", "Fair", "Fallen", "Golden", "Grand", "Green",
+                "Harbor", "Iron", "Jade", "Lake", "Light", "Lumi", "Mist", "Moon", "Neo",
+                "New", "North", "Old", "Opal", "Pacific", "Pearl", "Pine", "Port", "Ridge",
+                "River", "Rose", "Royal", "Sacred", "Silver", "Sky", "South", "Star", "Stone",
+                "Sun", "Terra", "Thorn", "Titan", "Umbra", "Vesper", "Whisper", "Wild", "Willow",
+                "Wind", "Winter", "Zephyr", "Azure", "Blaze", "Cinder", "Dusk", "Echo", "Frost",
+                "Glimmer", "Helix", "Ivory", "Juno", "Kestrel", "Lyric", "Mystic", "Nova", "Onyx",
+                "Phoenix", "Quasar", "Riven", "Seraph", "Twilight", "Utopia", "Vortex", "Woven",
+                "Xenon", "Yield", "Zenith"
+            ]
+        middles = [
+                "dale", "ville", "ton", "borough", "wood", "field", "crest", "haven", "brook",
+                "bridge", "cliff", "glen", "hollow", "land", "mere", "mont", "moor", "port",
+                "ridge", "rise", "run", "shade", "shire", "side", "spring", "summit", "vale",
+                "view", "water", "wick", "wood", "cross", "gate", "path", "pinnacle", "peak",
+                "point", "station", "stop", "town", "valley", "way", "bend", "bluff", "cove",
+                "falls", "forks", "grove", "heights", "isle", "lagoon", "mesa", "oasis", "plain",
+                "rapids", "reef", "shore", "summit", "terrace", "tide", "traverse", "vance",
+                "vortex", "walk", "wind", "haven", "light", "spark", "pulse", "core", "nexus",
+                "spire", "beacon", "citadel", "domain", "enclave", "forge", "garden", "harbor",
+                "keep", "labyrinth", "metropolis", "outpost", "paradise", "sanctuary", "sanctum",
+                "stronghold", "terminus", "terminus"
+            ]
+
+        suffixes = [
+                "ia", "ton", "ville", "bury", "ham", "ford", "ington", "borough", "wood", "land",
+                "field", "dale", "shire", "port", "burg", "mouth", "wick", "bridge", "castle",
+                "don", "holm", "ley", "minster", "oaks", "pine", "ridge", "stone", "view",
+                "water", "well", "haven", "glen", "crest", "peak", "point", "city", "polis",
+                "topia", "landia", "gard", "stead", "mere", "hold", "marsh", "moor", "strand",
+                "bend", "bluff", "cove", "docks", "falls", "forks", "grove", "heights", "isle",
+                "lagoon", "mesa", "oasis", "plain", "rapids", "reef", "shore", "summit", "terrace",
+                "tide", "traverse", "valley", "walk", "wind", "zone", "core", "edge", "gate",
+                "nexus", "orb", "prism", "shard", "spark", "spire", "vault", "vista", "zero"
+            ]
+        city_name = f"{random.choice(prefixes)}{random.choice(middles)}{random.choice(suffixes)}"
+        factory_types = [PowerPlant, FoodFactory, WaterFacility]
+        facilities = {}
+        for factory_type in factory_types:
+            for _ in range(2):
+                facilities.setdefault(factory_type, []).append(factory_type())
+        facilities[Leisure] = Leisure()
+        for _ in range(30):
+            facilities.setdefault(Housing, []).append(Housing())
+        resources = {Water:Water(100), Food:Food(100), Electricity:Electricity(100)}
+        return City(name=city_name, facilities=facilities, resources=resources)

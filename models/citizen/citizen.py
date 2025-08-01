@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, randint
 from models.citizen.work_info import WorkInfo
 from models.facility.leisure import Leisure
 from models.resource.electricity import Electricity
@@ -80,24 +80,50 @@ class Citizen:
         pass
 
     def __update_status(self) -> None:
-        pass
+        r = randint(1, 100)
+        if 20 < self.__age < 40:
+            if r == 100:
+                self.__is_alive = False
+        if self.__age >= 40:
+            if r > 95:
+                self.__is_alive = False
+        if self.__age >= 50:
+            if r > 90:
+                self.__is_alive = False
+        if self.__age >= 60:
+            if r > 80:
+                self.__is_alive = False
+        if self.__age >= 70:
+            if r > 65:
+                self.__is_alive = False
+        if self.__age >= 80:
+            if r > 50:
+                self.__is_alive = False
+        if self.__age >= 90:
+            if r > 20:
+                self.__is_alive = False
+        if self.__>= 100:
+            if r > 1:
+                self.__is_alive = False
+
 
     def __sleep(self) -> None:
         self.__satisfaction += 2    # increase by how many points???
 
-    def leisure_time(self, parks: list[Leisure]) -> None:
-        if not isinstance(parks, list):
-            raise TypeError("Parameter 'parks' must be a list")
-        if len(parks) == 0:
-            # What if list empty? Decrease satisfaction?
+    def leisure_time(self, facilities: list[Leisure]) -> None:
+        if not isinstance(facilities, list):
+            raise TypeError("Parameter 'facilities' must be a list")
+        
+        # If list empty (no available facilities) -> decrease satisfaction
+        if len(facilities) == 0:
             self.__satisfaction -= 1
-        if len(parks) > 1:
-            park = choice(parks)
+        elif len(facilities) > 1:
+            facility = choice(facilities)
         else:
-            park = parks[0]
+            facility = facilities[0]
 
-        if park.is_full:
+        if facility.is_full:
             self.__satisfaction -= 1
         else:
             self.__satisfaction += 2
-            park.integrity -= 1    # Need integrity setter if I want to be able to do this
+            facility.damage(1)    # damage by how many points???

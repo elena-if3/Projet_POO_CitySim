@@ -1,15 +1,16 @@
 import random
-from ..models.city import City
-from ..models.citizen.citizen import Citizen
-from ..models.citizen.profession import Profession
-from ..models.facility.food_factory import FoodFactory
-from ..models.facility.power_plant import PowerPlant
-from ..models.facility.water_facility import WaterFacility
-from ..models.facility.leisure import Leisure
-from ..models.facility.housing import Housing
-from ..models.resource.electricity import Electricity
-from ..models.resource.food import Food
-from ..models.resource.water import Water
+
+from models.citizen.work_info import WorkInfo
+from models.city import City
+from models.citizen.citizen import Citizen
+from models.facility.food_factory import FoodFactory
+from models.facility.power_plant import PowerPlant
+from models.facility.water_supply_plant import WaterSupplyPlant
+from models.facility.leisure import Leisure
+from models.facility.housing import Housing
+from models.resource.electricity import Electricity
+from models.resource.food import Food
+from models.resource.water import Water
 
 class Generator:
     @staticmethod
@@ -46,10 +47,10 @@ class Generator:
                 "Ramos", "Kim", "Cox", "Ward", "Richardson", "Watson", "Brooks", "Chavez"]
         name = f"{random.choice(first_names)} {random.choice(surnames)}"
         age = random.randint(0, 18)
-        profession = Profession.JOBLESS
+
+        work_info = WorkInfo()
         satisfaction = 100
-        day_worker = True
-        return Citizen(name, age, profession, satisfaction, day_worker)
+        return Citizen(name, age, satisfaction, work_info)
 
     @staticmethod
     def generate_city():
@@ -84,7 +85,7 @@ class Generator:
                 "tide", "traverse", "valley", "walk", "wind", "zone", "core", "edge", "gate",
                 "nexus", "orb", "prism", "shard", "spark", "spire", "vault", "vista", "zero"]
         city_name = f"{random.choice(prefixes)}{random.choice(middles)}{random.choice(suffixes)}"
-        factory_types = [PowerPlant, FoodFactory, WaterFacility]
+        factory_types = [PowerPlant, FoodFactory, WaterSupplyPlant]
         facilities = {}
         for factory_type in factory_types:
             for _ in range(2):

@@ -1,5 +1,7 @@
 from .factory import Factory
 from ..resource.food import Food
+from ..resource.electricity import Electricity
+from ..resource.water import Water
 from ...tools.constants import *
 
 class FoodFactory(Factory):
@@ -16,3 +18,8 @@ class FoodFactory(Factory):
         # Get total quantity produced during that shift
         produced_qty = super().daily_production(FOOD_DAILY_PRODUCTION_PER_WORKER, len(working_workers))
         return Food(produced_qty)
+    
+    def grow(self, electricity: Electricity, water: Water, is_night: bool) -> None:
+        water.amount -= WATER_LOSS_DAILY_FOOD_FACTORY
+        electricity.amount -= ELECTRICITY_LOSS_DAILY_FOOD_FACTORY
+        super().grow()

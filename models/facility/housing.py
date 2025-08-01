@@ -1,4 +1,6 @@
 from .facility import Facility
+from ...tools.constants import *
+import random
 
 class Housing(Facility):
     def __init__(self, **kwargs):
@@ -20,4 +22,10 @@ class Housing(Facility):
             raise Exception("This housing is full already")
 
         if self.capacity > len(self.__inhabitants):
-            self.inhabitants.append(citizen) 
+            self.inhabitants.append(citizen)
+    
+    def grow(self, electricity: Electricity, water: Water, is_night: bool) -> None:
+        electricity_loss = random.randint(0, self.inhabitants * 2)
+        electricity.amount -= electricity_loss
+        damage = round(self.inhabitants * DAMAGE_DAILY_PER_HOUSING_INHABITANT)
+        super().grow(damage)

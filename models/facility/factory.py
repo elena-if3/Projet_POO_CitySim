@@ -1,6 +1,8 @@
 from .facility import Facility
 from abc import abstractmethod
 from ...tools.constants import *
+from ..resource.electricity import Electricity
+import random
 
 class Factory(Facility):
     def __init__(self, **kwargs):
@@ -47,3 +49,7 @@ class Factory(Facility):
             return False
         self.workers.append(citizen)
         return True
+    
+    def grow(self):
+        daily_damage = random.randint(0, DAMAGE_MAX_DAILY_FACTORY)
+        super().grow(daily_damage)

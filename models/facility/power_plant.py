@@ -16,3 +16,7 @@ class PowerPlant(Factory):
         # Get total quantity produced during that shift
         produced_qty = super().daily_production(ELECTRICITY_DAILY_PRODUCTION_PER_WORKER, len(working_workers))
         return Electricity(produced_qty)
+    
+    def grow(self, electricity: Electricity, water: Water, is_night: bool) -> None:
+        water.amount -= WATER_LOSS_DAILY_POWER_PLANT
+        super().grow()

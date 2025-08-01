@@ -43,5 +43,5 @@ class Facility(ABC):
         else:
             self.__integrity -= damage
     
-    def grow():
-        pass
+    def grow(self, damage: int):
+        self.damage -= damage

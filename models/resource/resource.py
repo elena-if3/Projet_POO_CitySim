@@ -13,5 +13,7 @@ class Resource(ABC):
         if not isinstance(new_value,int):
             raise TypeError("amount must be an int")
         if new_value < 0:
-            raise ValueError("amount cant be negative")
+            #TODO MANAGE THE UNDERFLOW OF RESOURCE
+            #raise ValueError("amount cant be negative")
+            new_value = 0
         self.amount = new_value

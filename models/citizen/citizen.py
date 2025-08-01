@@ -129,8 +129,12 @@ class Citizen:
         else:
             facility = facilities[0]
 
+        if not isinstance(facility, Leisure):
+            raise TypeError("Object 'facility' must be an instance of Leisure")
+        # If no available facilities -> decrease satisfaction
         if facility.is_full:
             self.__satisfaction -= 1
+        # If available facility -> visit facility and increase satisfaction
         else:
+            facility.add_user(self)
             self.__satisfaction += 2
-            facility.damage(1)    # damage by how many points???

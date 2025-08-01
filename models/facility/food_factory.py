@@ -1,12 +1,12 @@
-from models.facility.factory import Factory
-from models.resource.food import Food
-from models.resource.electricity import Electricity
-from models.resource.water import Water
-from tools.constants import *
+from .factory import Factory
+from ..resource.food import Food
+from ..resource.electricity import Electricity
+from ..resource.water import Water
+from ...tools.constants import *
 
 class FoodFactory(Factory):
-    def __init__(self, name = "Food Factory", **kwargs):
-        super().__init__(name = name, **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
     
     def produce(self, day: int, is_day_shift: bool) -> Food:
         # Get factory workers working on that shift

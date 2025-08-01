@@ -136,7 +136,7 @@ class City:
     def grow_city(self, is_night):
         for facilities in self.__facilities.values():
             for facility in facilities:
-                facility.grow(electricity=self.__resources[Electricity])
+                facility.grow(electricity=self.__resources[Electricity], water=self.__resources[Water])
         self.grow_citizen(is_night=is_night)
 
     def live_day(self):

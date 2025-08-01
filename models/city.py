@@ -1,20 +1,26 @@
 import random
-from .facility.facility import Facility
-from .facility.housing import Housing
-from .facility.leisure import Leisure
-from .facility.factory import Factory
-from .resource.resource import Resource
-from .resource.food import Food
-from .resource.water import Water
-from .resource.electricity import Electricity
-from .citizen.citizen import Citizen
+from models.facility.facility import Facility
+from models.facility.housing import Housing
+from models.facility.leisure import Leisure
+from models.facility.factory import Factory
+from models.resource.resource import Resource
+from models.resource.food import Food
+from models.resource.water import Water
+from models.resource.electricity import Electricity
+from models.citizen.citizen import Citizen
 
 class City:
     def __init__(self, name="Springfield", facilities=None, resources=None):
         self.__day = 0
         self.__name = name
-        self.__facilities = facilities or {}
-        self.__resources = resources or {}
+        if facilities is None:
+            self.__facilities = {}
+        else:
+            self.__facilities = facilities
+        if resources is None:
+            self.__resources = {}
+        else:
+            self.__resources = resources
         self.__homeless_citizens = []
 
     @property

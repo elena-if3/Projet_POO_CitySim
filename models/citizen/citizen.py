@@ -1,7 +1,6 @@
 from random import choice, randint
 from models.citizen.work_info import WorkInfo
 from models.facility.leisure import Leisure
-from models.resource.electricity import Electricity
 from models.resource.food import Food
 from models.resource.water import Water
 
@@ -49,25 +48,23 @@ class Citizen:
         self.__is_alive = value
 
 
-    def grow(self, is_night: bool, electricity: Electricity, food: Food, water: Water) -> None:
-        if not isinstance(is_night, bool):
-            raise TypeError("Parameter 'is_night' must be a boolean")
-        if not isinstance(electricity, Electricity):
-            raise TypeError("Parameter 'electricity' must be a list")
+    def grow(self, food: Food, water: Water, is_night: bool) -> None:
         if not isinstance(food, Food):
             raise TypeError("Parameter 'food' must be a list")
         if not isinstance(water, Water):
             raise TypeError("Parameter 'water' must be a list")
+        if not isinstance(is_night, bool):
+            raise TypeError("Parameter 'is_night' must be a boolean")
         if not is_night:
             if self.work_info.day_worker:
-                self.__use_resources(electricity, food, water)
+                self.__use_resources(food, water)
             else:
                 self.__sleep()
                 self.__get_older()
                 self.__update_status()
         else:
             if not self.work_info.day_worker:
-                self.__use_resources(electricity, food, water)
+                self.__use_resources(food, water)
             else:
                 self.__sleep()
                 self.__get_older()
@@ -76,36 +73,46 @@ class Citizen:
     def __get_older(self) -> None:
         self.__age += 1
 
-    def __use_resources(self, electricity: Electricity, food: Food, water: Water) -> None:
+    def __use_resources(self, food: Food, water: Water) -> None:
         pass
 
     def __update_status(self) -> None:
         r = randint(1, 100)
-        if 20 < self.__age < 40:
+        # If aged between 20 and 40 -> 1% probability to die
+        if 20 < self.__age <= 40:
             if r == 100:
-                self.__is_alive = False
-        if self.__age >= 40:
+                self.__is_alive = False 
+        # If aged between 40 and 50 -> 5% probability to die
+        elif 40 < self.__age <= 50:
             if r > 95:
                 self.__is_alive = False
-        if self.__age >= 50:
+        # If aged between 50 and 60 -> 10% probability to die
+        elif 50 < self.__age <= 60:
             if r > 90:
                 self.__is_alive = False
-        if self.__age >= 60:
+        # If aged between 60 and 70 -> 20% probability to die
+        elif 60 < self.__age <= 70:
             if r > 80:
                 self.__is_alive = False
-        if self.__age >= 70:
+        # If aged between 70 and 80 -> 35% probability to die
+        elif 70 < self.__age <= 80:
             if r > 65:
                 self.__is_alive = False
-        if self.__age >= 80:
+        # If aged between 80 and 90 -> 50% probability to die
+        elif 80 < self.__age <= 90:
             if r > 50:
                 self.__is_alive = False
-        if self.__age >= 90:
-            if r > 20:
+        # If aged between 90 and 100 -> 90% probability to die
+        elif 90 < self.__age <= 100:
+            if r > 10:
                 self.__is_alive = False
-        if self.__>= 100:
+        # If aged between 100 and 110 -> 99% probability to die
+        elif 100 < self.__age <= 110:
             if r > 1:
                 self.__is_alive = False
-
+        # If over 110 -> dead by default
+        else:
+            self.__is_alive = False
 
     def __sleep(self) -> None:
         self.__satisfaction += 2    # increase by how many points???

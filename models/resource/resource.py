@@ -16,4 +16,4 @@ class Resource(ABC):
             #TODO MANAGE THE UNDERFLOW OF RESOURCE
             #raise ValueError("amount cant be negative")
             new_value = 0
-        self.amount = new_value
+        self.__amount = new_value

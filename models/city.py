@@ -106,7 +106,8 @@ class City:
     def attribute_factory(self, citizen):
         for factories in self.__facilities[citizen.profession].values():
             for factory in factories:
-                if factory.add_worker(citizen): # True if there is place in factory
+                if not factory.is_full:
+                    factory.add_worker(citizen)
                     return True
         return False
 

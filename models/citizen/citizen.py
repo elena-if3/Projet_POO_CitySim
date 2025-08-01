@@ -49,65 +49,66 @@ class Citizen:
 
 
     def grow(self, food: Food, water: Water, is_night: bool) -> None:
-        if not isinstance(food, Food):
-            raise TypeError("Parameter 'food' must be a list")
-        if not isinstance(water, Water):
-            raise TypeError("Parameter 'water' must be a list")
         if not isinstance(is_night, bool):
             raise TypeError("Parameter 'is_night' must be a boolean")
         if not is_night:
+            self.__get_older()
+            self.__update_status()
             if self.work_info.day_worker:
                 self.__use_resources(food, water)
             else:
                 self.__sleep()
-                self.__get_older()
-                self.__update_status()
         else:
-            if not self.work_info.day_worker:
-                self.__use_resources(food, water)
-            else:
+            if self.work_info.day_worker:
                 self.__sleep()
-                self.__get_older()
-                self.__update_status()
+            else:
+                self.__use_resources(food, water)
+
 
     def __get_older(self) -> None:
         self.__age += 1
 
     def __use_resources(self, food: Food, water: Water) -> None:
-        pass
+        if not isinstance(food, Food):
+            raise TypeError("parameter 'food' must be an instance of Food")
+        if not isinstance(water, Water):
+            raise TypeError("parameter 'water' must be an instance of Water")
+        food.amount -= 1
+        water.amount -= 1
 
     def __update_status(self) -> None:
         r = randint(1, 100)
+        age = self.__age // 365
         # If aged between 20 and 40 -> 1% probability to die
-        if 20 < self.__age <= 40:
+        if 20 < age <= 40:
             if r == 100:
                 self.__is_alive = False 
         # If aged between 40 and 50 -> 5% probability to die
-        elif 40 < self.__age <= 50:
+        elif 40 < age <= 50:
             if r > 95:
                 self.__is_alive = False
         # If aged between 50 and 60 -> 10% probability to die
-        elif 50 < self.__age <= 60:
+        elif 50 < age <= 60:
             if r > 90:
                 self.__is_alive = False
         # If aged between 60 and 70 -> 20% probability to die
-        elif 60 < self.__age <= 70:
+        elif 60 < age <= 70:
             if r > 80:
                 self.__is_alive = False
         # If aged between 70 and 80 -> 35% probability to die
-        elif 70 < self.__age <= 80:
+        elif 70 < age <= 80:
             if r > 65:
                 self.__is_alive = False
         # If aged between 80 and 90 -> 50% probability to die
-        elif 80 < self.__age <= 90:
+        elif 80 < age <= 90:
             if r > 50:
                 self.__is_alive = False
         # If aged between 90 and 100 -> 90% probability to die
-        elif 90 < self.__age <= 100:
+        elif 90 < age <= 100:
             if r > 10:
                 self.__is_alive = False
         # If aged between 100 and 110 -> 99% probability to die
-        elif 100 < self.__age <= 110:
+        elif 100 < age <= 110:
             if r > 1:
                 self.__is_alive = False
         # If over 110 -> dead by default

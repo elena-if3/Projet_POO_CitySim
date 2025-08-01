@@ -96,5 +96,5 @@ class Generator:
         resources = {Water:Water(100), Food:Food(100), Electricity:Electricity(100)}
         city = City(name=city_name, facilities=facilities, resources=resources)
         for _ in range(100):
-            city.add_citizen(Generator.citizen_generator())
+            city.add_citizen_housing(Generator.citizen_generator())
         return city

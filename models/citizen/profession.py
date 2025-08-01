@@ -8,4 +8,4 @@ class Profession(Enum):
     FOOD_FACTORY = FoodFactory
     POWER_PLANT = PowerPlant
     WATER_SUPPLY_PLANT = WaterSupplyPlant
-    JOBLESS = jobless
+    JOBLESS = "jobless"

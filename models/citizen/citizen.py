@@ -49,6 +49,10 @@ class Citizen:
 
 
     def grow(self, food: Food, water: Water, is_night: bool) -> None:
+        if not isinstance(food, Food):
+            raise TypeError("Parameter 'food' must be an instance of Food")
+        if not isinstance(water, Water):
+            raise TypeError("Parameter 'water' must be an instance of Water")
         if not isinstance(is_night, bool):
             raise TypeError("Parameter 'is_night' must be a boolean")
         if not is_night:
@@ -69,10 +73,6 @@ class Citizen:
         self.__age += 1
 
     def __use_resources(self, food: Food, water: Water) -> None:
-        if not isinstance(food, Food):
-            raise TypeError("parameter 'food' must be an instance of Food")
-        if not isinstance(water, Water):
-            raise TypeError("parameter 'water' must be an instance of Water")
         food.amount -= 1
         water.amount -= 1
 

@@ -37,6 +37,10 @@ class MenuBuilder:
         return cls
 
     @classmethod
+    def reset_menu(cls):
+        cls.__options = {}
+
+    @classmethod
     def build(cls):
         menu = Menu(cls.__options)
         return menu

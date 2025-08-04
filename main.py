@@ -25,7 +25,7 @@ class App():
         App.cities_list.append(new_city)
         Display.clear_screen()
         Display.display_menu("NEW CITY")
-        print(f"A new city named : {new_city.name} has been created")
+        print(f"A new city named : \033[1;96m{new_city.name}\033[0m has been created")
         Display.wait_input()
 
     def display_city_list(cities : list['City'])-> None:
@@ -64,7 +64,7 @@ class App():
         city_menu = (MenuBuilder.add_option("Add citizens [\033[1;33mNYI\033[0m]", lambda : None)
             .add_option("Add a building [\033[1;33mNYI\033[0m]", lambda : None)
             .add_option("Delete city [\033[1;33mNYI\033[0m]", lambda : None)
-            .add_option("Live day(s) [\033[1;33mNYI\033[0m]", lambda : None)
+            .add_option("Live day(s)", lambda : App.display_live_day(city))
             .add_return(False, lambda : App.toggle_manage_city())
             .build())
         while App.manage_city:
@@ -72,6 +72,13 @@ class App():
             Display.display_menu(f"{city.name} : Infos")
             Display.display_city_info(city)
             city_menu.show()
+
+    def display_live_day(city : City) -> None:
+        Display.clear_screen()
+        Display.display_menu(f"{city.name} : Live Days")
+        days_input = Display.input_int("Combien de jour voulez vous passer ? > ")
+        for i in range(days_input):
+            city.live_complete_day()
 
 if __name__ == "__main__":
     App.main_menu()

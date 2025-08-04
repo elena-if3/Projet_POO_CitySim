@@ -26,7 +26,7 @@ class Housing(Facility):
             self.inhabitants.append(citizen)
     
     def grow(self, electricity: "Electricity", water: "Water", is_night: bool) -> None:
-        electricity_loss = random.randint(MIN_ELECTRICITY_LOSS_DAILY_HOUSING, self.inhabitants * 2)
+        electricity_loss = random.randint(MIN_ELECTRICITY_LOSS_DAILY_HOUSING, len(self.inhabitants) * 2)
         electricity.amount -= electricity_loss
-        damage = round(self.inhabitants * DAMAGE_DAILY_PER_HOUSING_INHABITANT)
+        damage = round(len(self.inhabitants) * DAMAGE_DAILY_PER_HOUSING_INHABITANT)
         super().grow(damage)

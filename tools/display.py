@@ -50,5 +50,26 @@ class Display():
         print(f"Food : \033[1;96m{city.resources[Food].amount}\033[0m".center(Display.DISPLAY_WIDTH//3))
 
         print(f"\n{"="*Display.DISPLAY_WIDTH}", end="\n\n")
+
+    @classmethod
+    def input_int(cls, prompt, min : int = None, max : int = None):
+        '''
+        Return an int from the user or nothing if the input isnt valid.
+        :param prompt(str): Message to display
+        :param min(int, optional): Minimum value to accept:
+        :param max(int, optional): Maximum value to accept:
+        :return int: int from the user or nothing
+        '''
+        try :
+            inputted_int = int(input(prompt))
+            if min is not None and inputted_int < min:
+                raise ValueError("Value must be higher than {}".format(min))
+            if max is not None and inputted_int > max:
+                raise ValueError("Value must be lower than {}".format(max))
+        except ValueError:
+            print("Incorrect input, please enter a valid number.")
+        else:
+            return inputted_int
+
 if __name__ == '__main__':
     Display.main_menu()

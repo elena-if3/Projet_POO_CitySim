@@ -8,6 +8,7 @@ from models.resource.food import Food
 from models.resource.water import Water
 from models.resource.electricity import Electricity
 from models.citizen.citizen import Citizen
+from models.citizen.profession import Profession
 
 class City:
     def __init__(self, name="Springfield", facilities=None, resources=None):
@@ -81,7 +82,9 @@ class City:
     def add_resource(self, resource):
         if not isinstance(resource, Resource):
             raise TypeError("Not a Resource instance")
-        self.__resources[type(resource)] = self.__resources.get(type(resource), 0) + resource.amount
+        test_resource = self.__resources[type(resource)]
+        test_local_amount = self.__resources.get(type(resource)).amount
+        self.__resources[type(resource)].amount = self.__resources.get(type(resource)).amount + resource.amount
 
     def factory_produce(self, is_night):
         for facility_type, facilities in self.__facilities.items():
@@ -104,11 +107,12 @@ class City:
                 self.__homeless_citizens.remove(homeless_citizen)
 
     def attribute_factory(self, citizen):
-        for factories in self.__facilities[citizen.profession].values():
-            for factory in factories:
-                if not factory.is_full:
-                    factory.add_worker(citizen)
-                    return True
+        if citizen.work_info.profession != Profession.JOBLESS:
+            for factories in self.__facilities[citizen.work_info.profession].values():
+                for factory in factories:
+                    if not factory.is_full:
+                        factory.add_worker(citizen)
+                        return True
         return False
 
     def municipality(self):
@@ -123,13 +127,13 @@ class City:
                 break
         # reattribute work
         for citizen in self.citizens:
-            if not citizen.work.employed:
+            if not citizen.work_info.employed:
                 self.attribute_factory(citizen)
 
     def citizens_leisure(self):
         for citizen in self.citizens:
-            if self.weekday in citizen.work.off_days:
-                citizen.leisure(self.__facilities[Leisure])
+            if self.weekday in citizen.work_info.off_days:
+                citizen.leisure_time(self.__facilities[Leisure])
 
     def grow_citizen(self, is_night):
         for citizen in self.citizens:

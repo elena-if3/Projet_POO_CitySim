@@ -6,11 +6,11 @@ class PowerPlant(Factory):
     def __init__(self, name = "Power Plant", **kwargs):
         super().__init__(name = name, **kwargs)
     
-    def produce(self, day: int, is_day_shift: bool) -> "Electricity":
+    def produce(self, weekday: int, is_night: bool) -> "Electricity":
         # Get factory workers working on that shift
-        working_workers = super().get_working_workers(day, is_night)
+        working_workers = super().get_working_workers(weekday, is_night)
         # Make them work
-        super.workers_work(working_workers)
+        super().workers_work(working_workers)
         # Degrade factory
         super().damage(ELECTRICITY_PRODUCTION_DAMAGE)
         # Get total quantity produced during that shift

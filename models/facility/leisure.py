@@ -17,9 +17,9 @@ class Leisure(Facility):
     
     def grow(self, electricity: "Electricity", water: "Water", is_night: bool) -> None:
         # damage caused by users
-        damage = round(self.users * DAMAGE_DAILY_PER_LEISURE_USER)
+        damage = round(len(self.users) * DAMAGE_DAILY_PER_LEISURE_USER)
         # all users leave the leisure facility at end of day or night
-        self.users = []
+        self.__users = []
         if not is_night:
             # 'natural' damage, once in 24h
             damage += random.randint(0, DAMAGE_MAX_DAILY_LEISURE)
@@ -27,7 +27,7 @@ class Leisure(Facility):
         # apply damage
         super().grow(damage)
     
-    def add_user(citizen):
+    def add_user(self, citizen):
         if len(self.__users) == self.capacity:
             raise Exception("This leisure facility is full already")
         
